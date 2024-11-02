@@ -30,7 +30,7 @@ class Background(IntEnum):
 class Foreground(IntEnum):
     black = 30
     red = 31
-    gren = 32
+    green = 32
     yellow = 33
     blue = 34
     magenta = 35

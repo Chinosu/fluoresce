@@ -17,6 +17,11 @@ Created abstraction over GDB/MI with class `GDB`. Reusing much of `dev.py`, it e
 
 - `python lib/gdb.py`
 
+## Journal for (3 Nov, 0400)
+
+Re-architectured class `GDB` to better utilise the async nature of GDB/MI, especially how it has two output streams. By creating multiple threads/coroutines/tasks and assigning one to reading from GDB/MI, writing to it, and the main thread, we can better handle commands without hard-coding the number of async outputs (which is not ideal as the async outputs can technically arise whenever). Next, setup a pseudo-terminal (PTY) device and ask GDB/MI to connect the target executable's input and output to the PTY. This will be much appreciated in the future when we want to interact with the target terminal, i.e., to read its output or to send it input. Additionally, separate `GDB` into `BaseGDB` and `GDB`, where the base class provides lower-level functions that manage threads, processes, and file descriptors, and the standard subclass provides more useful intermediate-level functions like `breakpoint`, `functions`, `run`, `next`, `frames`, and `variables` that are equivalents of GDB/MI's most commonly used commonds. Finally, add an upper-level function is are composed of multiple GDB/MI commands which traverses the memory space, starting from varaibles in each frame and descending via indirection, array indexing, and field accessing like a garbage collector.
+
 
 
 - analysing GDB/MI output syntax - token, prefix, body
+- synchronous, asynchronous
