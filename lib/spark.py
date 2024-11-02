@@ -64,7 +64,7 @@ def spark(item: any, formatters: Sequence[IntEnum]) -> str:
 
 
 if __name__ == "__main__":
-    print(spark("hello, world", [Misc.underline, Foreground.red]))
+    print(spark("hello, world", [Misc.underline, Foreground.red]).encode())
     print(spark("another one", [Misc.bold, Background.bright_black]))
     print(spark("yet another one", [Misc.faint, Foreground.cyan]))
     print(spark("yet another one", [Foreground.cyan]))

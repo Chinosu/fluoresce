@@ -10,3 +10,13 @@ This is our first "checkpoint". By which, we have created a main driver file `de
 
 - `python dev.py`
 - `python lib/spark.py`
+
+## Journal for (2 Nov, 0100)
+
+Created abstraction over GDB/MI with class `GDB`. Reusing much of `dev.py`, it encapsulates GDB commands likelisting functions, creating breakpoints, running, and stepping. We note the mistake of presuming that GDB/MI is exactly synchronous. It is, in actuality, architectured to have a synchronous stream as well as an asynchronous stream. The next task will be to make `GDB` better support those streams. Demo commands are as follows.
+
+- `python lib/gdb.py`
+
+
+
+- analysing GDB/MI output syntax - token, prefix, body
