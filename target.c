@@ -63,6 +63,7 @@ int main() {
     int pi = 3;
     int *pi_ref = &pi;
     printf("%x %ls\n", pi, pi_ref);
+    
     // Create new Person nodes
     struct Person *person1 = createPerson("Alice", 28, "New York", "NY");
     struct Person *person2 = createPerson("Bob", 34, "Los Angeles", "CA");
