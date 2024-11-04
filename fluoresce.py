@@ -1,6 +1,4 @@
 from sys import argv
-from asyncio import all_tasks, sleep, run
-from typing import Coroutine
 from pprint import pformat
 from pathlib import Path
 
@@ -18,16 +16,6 @@ from textual.containers import VerticalScroll
 
 from base_gdb import parse_result
 from gdb import GDB
-
-TEXT = """
-    I must not fear.
-    Fear is the mind-killer.
-    Fear is the little-death that brings total obliteration.
-    I will face my fear.
-    I will permit it to pass over me and through me.
-    And when it has gone past, I will turn the inner eye to see its path.
-    Where the fear has gone there will be nothing. Only I will remain.
-"""
 
 
 class Fluoresce(App):
