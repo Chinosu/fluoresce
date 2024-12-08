@@ -195,7 +195,7 @@ async def main():
                 # pp(await gdb.frames())
                 # pp(await gdb.variables())
                 res = await gdb.traverse()
-                print(spark(f"Info at report!", [Foreground.bright_yellow]))
+                print(spark(f"Information!", [Foreground.bright_yellow]))
                 pp(res)
         except AssertionError as e:
             if "No registers." not in str(e):

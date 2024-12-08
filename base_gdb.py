@@ -35,7 +35,7 @@ class BaseGDB:
             "-Wextra",
             "-Werror",
             "-ftrivial-auto-var-init=zero",
-            "-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
+            # "-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
@@ -52,7 +52,12 @@ class BaseGDB:
             "-nh",  # do not execute commands found in home directory init files
             "--tty",  # alternatively, use command `-inferior-tty-set`
             ttyname(self.fd_slave),
+            "--args",
             TARGET,
+            "1",
+            "2",
+            "3",
+            "4",
             stdin=PIPE,
             stdout=PIPE,
         )
@@ -141,6 +146,7 @@ def parse_result(text: str):
     Crashes sometimes due to results containing junk strings
     because of reading uninitialised and deallocated values
     """
+    orig = text
 
     text = remove_array_keys(text)
     text = sub(r"([a-zA-Z\-_]+)=", r'"\1":', text)
@@ -148,8 +154,8 @@ def parse_result(text: str):
         parsed = json.loads(f"{{{text}}}")
     except json.decoder.JSONDecodeError as e:
         print(e)
-        with open("dump.txt", "wb") as file:
-            file.write(text.encode())
+        with open("dump.txt", "ab") as file:
+            file.write(orig.encode() + b"\n")
         assert False
     return parsed
 
